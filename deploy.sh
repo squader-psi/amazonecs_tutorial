@@ -13,7 +13,7 @@ sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ../tetra-app.json > tetra-app-v_${BU
 aws ecs register-task-definition --family tetra-app --cli-input-json file://tetra-app-v_${BUILD_NUMBER}.json
 
 # Update the service with the new task definition and desired count
-REVISION=`aws ecs describe-task-definition --task-definition tetra-app | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+REVISION=`aws ecs describe-task-definition --region ${REGION}  --task-definition tetra-app | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
 SERVICES=`aws ecs describe-services --services ${SERVICE_NAME} --cluster ${CLUSTER} --region ${REGION} | jq .failures[]`
 
 
