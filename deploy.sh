@@ -8,7 +8,7 @@ TASK_FAMILY="tetra-app"
 
 # Create a new task definition for this build
 
-sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ../tetra-app.json > tetra-app-v_${BUILD_NUMBER}.json
+sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" /var/lib/jenkins/workspace/tetra-app.json > tetra-app-v_${BUILD_NUMBER}.json
 
 aws ecs register-task-definition --family tetra-app --cli-input-json file://tetra-app-v_${BUILD_NUMBER}.json
 
